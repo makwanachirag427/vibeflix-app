@@ -13,6 +13,7 @@ import watchlistRoutes from "./routes/watchlist.route.js"
 import reviewRoutes from "./routes/review.route.js"
 
 //middleware
+import { protectRoute } from "./middleware/protectRoute.js";
 
 const app = express();
 const PORT = ENV_VARS.PORT;
@@ -22,11 +23,11 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api/v1/auth",authRoutes);
-app.use("/api/v1/movie",movieRoutes);
-app.use("/api/v1/tv",tvRoutes);
-app.use("/api/v1/search",searchRoutes);
-app.use("/api/v1/watchlist",watchlistRoutes);
-app.use("/api/v1/review",reviewRoutes);
+app.use("/api/v1/movie",protectRoute,movieRoutes);
+app.use("/api/v1/tv",protectRoute,tvRoutes);
+app.use("/api/v1/search",protectRoute,searchRoutes);
+app.use("/api/v1/watchlist",protectRoute,watchlistRoutes);
+app.use("/api/v1/review",protectRoute,reviewRoutes);
 
 app.listen(PORT, () => {
   connectDB();
