@@ -10,7 +10,6 @@ import movieRoutes from "./routes/movie.route.js"
 import tvRoutes from "./routes/tv.route.js"
 import searchRoutes from "./routes/search.route.js"
 import watchlistRoutes from "./routes/watchlist.route.js"
-import reviewRoutes from "./routes/review.route.js"
 
 //middleware
 import { protectRoute } from "./middleware/protectRoute.js";
@@ -27,7 +26,6 @@ app.use("/api/v1/movie",protectRoute,movieRoutes);
 app.use("/api/v1/tv",protectRoute,tvRoutes);
 app.use("/api/v1/search",protectRoute,searchRoutes);
 app.use("/api/v1/watchlist",protectRoute,watchlistRoutes);
-app.use("/api/v1/review",protectRoute,reviewRoutes);
 
 app.listen(PORT, () => {
   connectDB();

@@ -52,3 +52,13 @@ export const removeFromWatchList = async (req, res) => {
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
+
+
+export const getWatchList = async (req, res) => {
+  try {
+    res.status(200).json({ success: true, watchlist: req.user.watchlist });
+  } catch (error) {
+    console.log("Error in getWatchList controller ", error.message);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};

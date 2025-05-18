@@ -31,7 +31,7 @@ const SignUpPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.2)),url('/hero.png')] bg-gradient-to-b text-white pb-20">
+    <div className="min-h-screen bg-[linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.2)),url('/hero.png')]  text-white pb-20">
       <header className="max-w-6xl mx-auto p-6">
         <Link to={"/"}>
           <img src="/vibeflix-logo.png" className="w-25 lg:w-40" />

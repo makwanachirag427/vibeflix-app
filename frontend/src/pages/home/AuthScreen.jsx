@@ -89,6 +89,7 @@ const AuthScreen = () => {
           </form>
         </div>
       </div>
+      
       {/* Trending  */}
       <div
         className="relative mt-10 max-w-[90vw] mx-auto  flex flex-col justify-center item-center p-2 sm:px-10"
