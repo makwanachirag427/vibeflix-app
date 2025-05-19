@@ -186,7 +186,7 @@ const WatchPage = () => {
         </div>
 
         {/* details  */}
-        <div className="flex flex-col lg:flex-row  max-w-6xl gap-20  justify-between items-center">
+        <div className="flex flex-col lg:flex-row mx-auto max-w-6xl gap-20  justify-between items-center">
           {/* info  */}
           <div className="mb-4 sm:mb-0">
             <h2 className="font-extrabold text-3xl sm:text-6xl text-balance mt-4">
@@ -225,13 +225,12 @@ const WatchPage = () => {
             )}
           </div>
           {/* poster  */}
-        
-            <img
-              src={ORIGINAL_IMG_BASE_URL + contentDetails?.poster_path}
-              alt="poster image"
-              className="max-h-[600px] bg-gray-700 rounded-sm border-4 border-gray-700"
-            />
-          
+
+          <img
+            src={ORIGINAL_IMG_BASE_URL + contentDetails?.poster_path}
+            alt="poster image"
+            className="max-h-[600px] bg-gray-700 rounded-sm border-4 border-gray-700"
+          />
         </div>
 
         {/* similar movies  */}

@@ -19,6 +19,7 @@
     "react-player": "^2.16.0",
     "react-router-dom": "^7.6.0",
     "tailwindcss": "^4.1.6",
+    "vibeflix": "file:..",
     "zustand": "^5.0.4"
   },
   "devDependencies": {
