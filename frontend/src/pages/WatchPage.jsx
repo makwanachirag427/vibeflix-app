@@ -7,7 +7,6 @@ import { ChevronLeft, ChevronRight, Plus, X } from "lucide-react";
 import ReactPlayer from "react-player";
 import { ORIGINAL_IMG_BASE_URL, SMALL_IMG_BASE_URL } from "../utils/constants";
 import { formatReleasedDate } from "../utils/dateFunctions";
-import { useAuthStore } from "../store/authUser";
 import WatchPageSkeleton from "../components/skeletons/WatchPageSkeleton";
 
 const WatchPage = () => {
@@ -19,8 +18,8 @@ const WatchPage = () => {
   const [loading, setLoading] = useState(true);
   const [showArrows, setShowArrows] = useState(false);
   const [isInWatchList, setIsInWatchList] = useState(false);
-  const { contentType } = useContentStore();
-  const { user } = useAuthStore();
+  const { contentType, watchList, setWatchList,getWatchList } =
+    useContentStore();
 
   const sliderRef = useRef(null);
 
@@ -50,26 +49,21 @@ const WatchPage = () => {
 
   const handleWatchListButton = async () => {
     if (isInWatchList) {
-      await axios.delete(`/api/v1/watchlist/remove/${id}`, {
+      const res = await axios.delete(`/api/v1/watchlist/remove/${id}`, {
         data: { contentType },
       });
       setIsInWatchList(false);
+      setWatchList(res.data.watchlist);
     } else {
-      await axios.post(`/api/v1/watchlist/add/${id}`, {
+      const res = await axios.post(`/api/v1/watchlist/add/${id}`, {
         image: contentDetails?.poster_path,
         name: contentDetails?.title || contentDetails?.name,
         contentType,
       });
       setIsInWatchList(true);
+      setWatchList(res.data.watchlist);
     }
   };
-
-  useEffect(() => {
-    const exists = user?.watchlist?.some(
-      (item) => item.id === id && item.contentType === contentType
-    );
-    setIsInWatchList(exists);
-  }, [user, id, contentType]);
 
   useEffect(() => {
     const getTrailers = async () => {
@@ -114,6 +108,14 @@ const WatchPage = () => {
     };
     getSimilarContent();
   }, [id, contentType]);
+
+  useEffect(() => {
+    getWatchList();
+    const exists = watchList.some(
+      (item) => item.id === id && item.contentType === contentType
+    );
+    setIsInWatchList(exists);
+  }, [id, contentType, watchList,getWatchList]);
 
   useEffect(() => {
     setLoading(true); // reset loading before refetch
@@ -223,11 +225,13 @@ const WatchPage = () => {
             )}
           </div>
           {/* poster  */}
-          <img
-            src={ORIGINAL_IMG_BASE_URL + contentDetails?.poster_path}
-            alt="poster image"
-            className="max-h-[600px] rounded-md mx-auto"
-          />
+          <div className="p-1 lg:w-full  bg-gray-800 border border-gray-700 rounded-sm">
+            <img
+              src={ORIGINAL_IMG_BASE_URL + contentDetails?.poster_path}
+              alt="poster image"
+              className="max-h-[600px] h-full lg:h-[500px]  rounded-sm mx-auto border border-gray-700"
+            />
+          </div>
         </div>
 
         {/* similar movies  */}
@@ -252,11 +256,12 @@ const WatchPage = () => {
                   <Link
                     to={`/watch/${item.id}`}
                     key={i}
-                    className="min-w-[150px] md:min-w-[180px]  overflow-hidden rounded-lg shadow-md shadow-gray-700 hover:scale-103 transition-all duration-300 bg-contain"
+                    className="min-w-[150px] md:min-w-[180px]  overflow-hidden rounded-sm p-1  bg-gray-800 border border-gray-700 hover:scale-103 transition-all duration-300 bg-contain"
                   >
                     <img
                       src={SMALL_IMG_BASE_URL + item.poster_path}
                       alt=" poster image"
+                      className=" rounded-sm border border-gray-700 h-full"
                     />
                   </Link>
                 );

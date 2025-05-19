@@ -42,14 +42,14 @@ const Navbar = () => {
         </div>
       </div>
       {/* logout and search   */}
-      <div className="flex items-center gap-3 z-50">
+      <div className="flex items-center gap-4 sm:gap-2 z-50">
         <Link to={"/search"}>
-          <Search  className="size-5 sm:size-6"/>
+          <Search/>
         </Link>
         <img src={user.image} className="size-8 rounded" />
-        <LogOut onClick={logout} className="size-5 sm:size-6" />
+        <LogOut onClick={logout} />
         <div className="sm:hidden">
-          <Menu onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}  className="size-5 sm:size-6"/>
+          <Menu onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}/>
         </div>
       </div>
 

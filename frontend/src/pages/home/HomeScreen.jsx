@@ -6,7 +6,7 @@ import {
   TV_CATEGORIES,
   MOVIE_CATEGORIES,
 } from "../../utils/constants";
-import { Heart, HeartIcon, Info, Play, Plus, X } from "lucide-react";
+import { Info, Play, Plus, X } from "lucide-react";
 import { useContentStore } from "../../store/content";
 import MovieSlider from "../../components/MovieSlider";
 import { useEffect, useState } from "react";
@@ -15,6 +15,7 @@ import { useAuthStore } from "../../store/authUser";
 
 const HomeScreen = () => {
   const [isInWatchList, setIsInWatchList] = useState(false);
+  const [imgLoading, setImgLoading] = useState(true);
 
   const { trendingContent } = useGetTrendingContent();
   const { contentType } = useContentStore();
@@ -42,17 +43,33 @@ const HomeScreen = () => {
         item.id === trendingContent?.id &&
         item.contentType === trendingContent?.media_type
     );
+
     setIsInWatchList(exists);
   }, [user, trendingContent?.id, trendingContent?.media_type]);
 
-  console.log(trendingContent);
+  useEffect(() => {
+    setImgLoading(true);
+  }, [contentType,trendingContent]);
+
+  if (!trendingContent)
+    return (
+      <div className="h-screen text-white relative">
+        <Navbar />
+        <div className="absolute top-0 left-0 w-full h-full bg-black/70 flex items-center justify-center -z-10 shimmer" />
+      </div>
+    );
+
   return (
     <>
       <div className="relative min-h-screen text-white">
         <Navbar />
+        {imgLoading && (
+          <div className="absolute top-0 left-0 w-full h-full bg-black/70 flex items-center justify-center -z-10 shimmer" />
+        )}
         <img
           src={ORIGINAL_IMG_BASE_URL + trendingContent?.backdrop_path}
           className="absolute top-0 left-0 h-full w-full -z-50 object-cover"
+          onLoad={() => setImgLoading(false)}
         />
         <div
           className="absolute top-0 left-0 h-full w-full bg-black/50 -z-50"

@@ -77,6 +77,7 @@ const AuthScreen = () => {
             <input
               type="email"
               name="email"
+              required
               className="p-2.5 sm:p-3.5 border border-gray-500 bg-slate-500/20 rounded w-full sm:w-100"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -119,11 +120,12 @@ const AuthScreen = () => {
               <Link
                 to={"/login"}
                 key={i}
-                className="min-w-[150px] md:min-w-[180px] lg:min-w-[200px] overflow-hidden rounded-lg shadow-md shadow-gray-700 hover:scale-103 transition-all duration-300 bg-contain"
+                className="min-w-[150px] md:min-w-[180px] lg:min-w-[200px] rounded-sm bg-gray-800 p-1 border border-gray-700 hover:scale-103 transition-all duration-300 bg-contain"
               >
                 <img
                   src={SMALL_IMG_BASE_URL + item.poster_path}
                   alt=" poster image"
+                  className="rounded-sm border border-gray-700"
                 />
               </Link>
             ))}

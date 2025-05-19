@@ -72,11 +72,12 @@ const MovieSlider = ({ category }) => {
             <Link
               to={`/watch/${item.id}`}
               key={i}
-              className="min-w-[150px] h-full md:min-w-[180px] lg:min-w-[200px] overflow-hidden rounded-lg shadow-md shadow-gray-700 hover:scale-103 transition-all duration-300 bg-contain"
+              className="min-w-[150px] h-full md:min-w-[180px] lg:min-w-[200px]  rounded-sm p-1 bg-gray-800 border border-gray-700 hover:scale-103 transition-all duration-300 bg-contain"
             >
               <img
                 src={SMALL_IMG_BASE_URL + item.poster_path}
                 alt=" poster image"
+                className=" rounded-sm border border-gray-700 h-full"
               />
             </Link>
           ))}

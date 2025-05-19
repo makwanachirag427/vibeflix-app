@@ -1,14 +1,13 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import { useAuthStore } from "../store/authUser";
 import { X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { SMALL_IMG_BASE_URL } from "../utils/constants";
 import axios from "axios";
+import { useContentStore } from "../store/content";
 const WatchListPage = () => {
   const [activeTab, setActiveTab] = useState("movie");
-  const { user } = useAuthStore();
-  const [watchList, setWatchList] = useState([]);
+  const { watchList, setWatchList, getWatchList } = useContentStore();
 
   const filteredItems = watchList.filter(
     (item) => item.contentType === activeTab
@@ -19,8 +18,8 @@ const WatchListPage = () => {
       await axios.delete(`/api/v1/watchlist/remove/${id}`, {
         data: { contentType },
       });
-      setWatchList((prev) =>
-        prev.filter(
+      setWatchList(
+        watchList.filter(
           (item) => item.id !== id || item.contentType !== contentType
         )
       );
@@ -30,16 +29,8 @@ const WatchListPage = () => {
   };
 
   useEffect(() => {
-    const getWatchList = async () => {
-      try {
-        const res = await axios.get("/api/v1/watchlist");
-        setWatchList(res.data.watchlist);
-      } catch (error) {
-        console.error(error.message);
-      }
-    };
     getWatchList();
-  }, [user.watchList]);
+  }, [watchList,getWatchList]);
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -62,7 +53,7 @@ const WatchListPage = () => {
           {filteredItems.length > 0 ? (
             filteredItems.map((item) => (
               <div
-                className="relative w-[50vw] sm:w-[220px] rounded-sm p-2 bg-gray-800 border border-gray-700 h  group "
+                className="relative w-[50vw] sm:w-[220px] rounded-sm p-1 bg-gray-800 border border-gray-700 group"
                 key={item.id}
               >
                 <Link to={`/watch/${item.id}`}>
