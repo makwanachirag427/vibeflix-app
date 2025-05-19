@@ -18,7 +18,7 @@ const WatchPage = () => {
   const [loading, setLoading] = useState(true);
   const [showArrows, setShowArrows] = useState(false);
   const [isInWatchList, setIsInWatchList] = useState(false);
-  const { contentType, watchList, setWatchList,getWatchList } =
+  const { contentType, watchList, setWatchList, getWatchList } =
     useContentStore();
 
   const sliderRef = useRef(null);
@@ -115,7 +115,7 @@ const WatchPage = () => {
       (item) => item.id === id && item.contentType === contentType
     );
     setIsInWatchList(exists);
-  }, [id, contentType, watchList,getWatchList]);
+  }, [id, contentType, watchList, getWatchList]);
 
   useEffect(() => {
     setLoading(true); // reset loading before refetch
@@ -186,7 +186,7 @@ const WatchPage = () => {
         </div>
 
         {/* details  */}
-        <div className="flex flex-col lg:flex-row max-w-6xl gap-20 justify-between items-center">
+        <div className="flex flex-col lg:flex-row  max-w-6xl gap-20  justify-between items-center">
           {/* info  */}
           <div className="mb-4 sm:mb-0">
             <h2 className="font-extrabold text-3xl sm:text-6xl text-balance mt-4">
@@ -225,13 +225,13 @@ const WatchPage = () => {
             )}
           </div>
           {/* poster  */}
-          <div className="p-1 lg:w-full  bg-gray-800 border border-gray-700 rounded-sm">
+        
             <img
               src={ORIGINAL_IMG_BASE_URL + contentDetails?.poster_path}
               alt="poster image"
-              className="max-h-[600px] h-full lg:h-[500px]  rounded-sm mx-auto border border-gray-700"
+              className="max-h-[600px] bg-gray-700 rounded-sm border-4 border-gray-700"
             />
-          </div>
+          
         </div>
 
         {/* similar movies  */}
