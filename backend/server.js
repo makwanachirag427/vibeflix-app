@@ -17,16 +17,20 @@ import { protectRoute } from "./middleware/protectRoute.js";
 
 const app = express();
 const PORT = ENV_VARS.PORT;
-const frontendURL = ENV_VARS.NODE_ENV === "development" ? " http://localhost:5173" : ""
-
+const frontendURL =
+  ENV_VARS.NODE_ENV === "development"
+    ? " http://localhost:5173"
+    : "https://vibeflix-app.onrender.com";
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({
-  origin : frontendURL,
-  credentials : true,
-}));
+app.use(
+  cors({
+    origin: frontendURL,
+    credentials: true,
+  })
+);
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/movie", protectRoute, movieRoutes);

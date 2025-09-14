@@ -3,7 +3,7 @@ import axios from "axios";
 const backendURL =
   import.meta.env.MODE === "development"
     ? "http://localhost:5000"
-    : "";
+    : "vibeflix-app-production.up.railway.app";
 
 const axiosInstance = axios.create({
   baseURL: backendURL,
