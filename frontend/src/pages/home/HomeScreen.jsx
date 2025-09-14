@@ -10,7 +10,7 @@ import { Info, Play, Plus, X } from "lucide-react";
 import { useContentStore } from "../../store/content";
 import MovieSlider from "../../components/MovieSlider";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../../utils/axios";
 import { useAuthStore } from "../../store/authUser";
 
 const HomeScreen = () => {

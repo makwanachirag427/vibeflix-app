@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../utils/axios";
 import { useEffect, useState } from "react";
 import { useContentStore } from "../store/content";
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import axios from "axios";
+import axios from "../utils/axios";
 import { SMALL_IMG_BASE_URL } from "../utils/constants";
 import { formatDate } from "../utils/dateFunctions";
 import { Trash } from "lucide-react";

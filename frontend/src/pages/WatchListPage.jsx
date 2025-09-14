@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import { X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { SMALL_IMG_BASE_URL } from "../utils/constants";
-import axios from "axios";
+import axios from "../utils/axios";
 import { useContentStore } from "../store/content";
 const WatchListPage = () => {
   const [activeTab, setActiveTab] = useState("movie");

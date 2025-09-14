@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { ChevronLeft, ChevronRight, Cross, Plus, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import axios from "axios";
+import axios from "../../utils/axios";
 import { cardInfo, FAQs, SMALL_IMG_BASE_URL } from "../../utils/constants";
 const AuthScreen = () => {
   const [email, setEmail] = useState("");
